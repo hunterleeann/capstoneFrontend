@@ -20,7 +20,7 @@ const classApi = api.injectEndpoints({
           url: "/auth/login",
           method: "GET",
           body: {
-           id
+          id
           },
         }),
         providesTag: ["User"],

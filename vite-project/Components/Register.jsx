@@ -6,7 +6,8 @@ import axios from "axios";
 
 export default function Register() {
   const [registerUser] = useAddUserMutation();
-  const [form, setForm] = useState({ userName: "", email: "", password: "" });
+  const [form, setForm] = useState({ userName: "", email: "", password: "" }); 
+  
   // const navigate = useNavigate();
 
   const change = (e) => {
@@ -23,44 +24,25 @@ export default function Register() {
         userName: form.userName,
         email: form.email,
         password: form.password,
-      });
+      }); 
+      alert("Registered!")
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
       console.log("Server Response:", data);
-
-      // const response = await fetch("http://localhost:3000/api/register", {
-      //     method: "Post",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       email: form.email,
-      //       password: form.password,
-      //     }),
-      //   });
-      //   const data = await response.json();
-   
-
-      // const response = await registerUser(form).unwrap();
-      // console.log(response);
-
-      // console.log(data);
-      // localStorage.setItem("token", data.token);
-      // navigate("/users");
     } catch (error) {
-      console.error(error);
+      console.error(error); 
+      alert("Username or email already taken");
     }
   };
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form className="formClass" onSubmit={submit}>
         <div className="form-group">
-          <label>Username</label>
+          <label>Username: </label>
           <input
             type="userName"
-            className="form-control"
+            className="userName"
             aria-describedby="userNameHelp"
             placeholder="Enter username"
             name="userName"
@@ -68,7 +50,7 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Email address</label>
+          <label>Email address: </label>
           <input
             type="email"
             className="form-control"
@@ -79,7 +61,7 @@ export default function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>Password: </label>
           <input
             type="password"
             className="form-control"
@@ -91,7 +73,8 @@ export default function Register() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
+      </form> 
+      {/* <h3>Hello, {form.userName}</h3> */}
     </div>
   );
 }

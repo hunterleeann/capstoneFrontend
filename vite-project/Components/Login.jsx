@@ -1,27 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useGetUserQuery } from "./RegisterSlice";
+import { useGetUserQuery } from "./RegisterSlice"; 
+import Account from "../Components/Account";
+
 
 export default function Login() {
   const { id } = useParams();
-  // const { data, isSuccess } = useGetUserQuery(id);
-  //const [updateUser] = useUpdateUserMutation();
-  //const [email, setEmail] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
-
-  // const getUser = async () => {
-  //   try {
-  //     const { data } = await axios.get(
-  //       `http://localhost:3000/auth/login/${id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-  //     console.log(data);
+  const navigate = useNavigate(); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const change = (e) => {
     setForm((prev) => ({
@@ -37,68 +25,24 @@ export default function Login() {
         email: form.email,
         password: form.password,
       });
+      //setIsLoggedIn(true); 
+      //alert("Logged in!");
       console.log(response.data);
-      //localStorage.setItem("token", response.data.token); 
       const token = response.data; 
       localStorage.setItem("token", token);
-      //console.log(data)
-      // localStorage.setItem("user", JSON.stringify(data.user));
-      //await fetchUserDetails(data.token);
-      //setUser(data.user);
-
       console.log("Login Response:", response.data);
-
-      // if (!data.token) {
-      //   throw new Error("Missing token in login response.");
-      // }
-
-      // await fetchUserDetails(data.token);
-
-      //navigate("/account");
+      navigate("/account")
     } catch (error) {
-      console.error("Login Error:", error);
+      console.error("Login Error:", error); 
+      alert("Incorrect username or password");
     }
   };
-  // const submit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // const { data } = await axios.put(
-  //   `http://localhost:3000/api/user/${id}`,
-  //   {
-  //     email,
-  //   },
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   }
-  // );
-  // console.log(data);
-  // const response = await fetch(`http://localhost:3000/api/user/${id}`, {
-  //   method: "Put",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   },
-  //   body: JSON.stringify({
-  //     email,
-  //   }),
-  // });
-  // const data = await response.json();
-  // console.log(data);
-  // const response = await updateUser({ id, email }).unwrap();
-  //   console.log(response);
-  //   navigate("/users");
-  // } catch (error) {
-  //   console.error(error);
-  // }
-  // };
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form className="formClass" onSubmit={submit}>
         <div className="form-group">
-          <label>Email address</label>
+          <label>Email address: </label>
           <input
             type="email"
             className="form-control"
@@ -110,7 +54,7 @@ export default function Login() {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>Password: </label>
           <input
             type="password"
             className="form-control"
@@ -120,7 +64,7 @@ export default function Login() {
             onChange={change}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button id="submitButton" type="submit" className="btn btn-primary" >
           Submit
         </button>
       </form>

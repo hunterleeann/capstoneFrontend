@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; 
-import Reviews from "./Reviews"; 
-import { Link } from "react-router-dom"; 
+import axios from "axios";
+import Reviews from "./Reviews";
+import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
-
-
 export default function Account() {
-  const [accountData, setAccountData] = useState(null); 
+  const [accountData, setAccountData] = useState(null);
   const navigate = useNavigate();
-
+  const [userReviews, setUserReviews] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +31,7 @@ export default function Account() {
     fetchData();
   }, []);
 
+  console.log(accountData);
   const unenroll = async (classId) => {
     try {
       const token = localStorage.getItem("token");
@@ -41,16 +40,36 @@ export default function Account() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
-      
       );
       console.log(" data:", res.data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  useEffect(() => {
+    const getUserRev = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const response = await axios.get(
+          "http://localhost:3032/account/reviews",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUserReviews(response.data);
+        console.log("test", response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    getUserRev();
+  }, []);
 
   return (
     <div>
@@ -74,13 +93,7 @@ export default function Account() {
                   <button onClick={() => unenroll(classItem.classId)}>
                     Unenroll
                   </button>
-                    {/* {navigate("/Reviews")} */}
-                    {/* <Link
-              to={<Reviews />}
-              onClick={() => {
-              }}
-            >test</Link> */}
-                  </li>
+                </li>
               ))}
             </ul>
           ) : (
@@ -88,9 +101,25 @@ export default function Account() {
           )}
         </>
       ) : (
-        <p>Loading...</p>
+        <p>Please login</p>
+      )}
+
+      <h3>My Reviews</h3>
+
+      {Array.isArray(userReviews) && userReviews.length > 0 ? (
+        <ul>
+          {userReviews.map((rev) => (
+            <li key={rev.id} style={{ margin: 10, border: "1px solid #ccc" }}>
+              {console.log(rev.class.classType)}
+              <p>Class: {rev.class.classType}</p>
+              <p>Score: {rev.score}</p>
+              <p>Comment: {rev.comment}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews</p>
       )}
     </div>
   );
-  
 }

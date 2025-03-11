@@ -9,10 +9,16 @@ import Login from "/Components/Login";
 import Classes from "../Components/Classes";
 import Account from "../Components/Account";
 import Reviews from "../Components/Reviews";
+import MyReviews from "../Components/MyReviews";
+import SingleClassRev from "../Components/SingleClassRev";
+//import './styles.css';
 
 function App() {
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
+  //const [classRev, setClassRev] = useState();
+  const [userReviews, setUserReviews] = useState();
+  const [allReviews, setAllReviews] = useState();
   const [classRev, setClassRev] = useState();
 
   return (
@@ -20,18 +26,45 @@ function App() {
       <Provider store={store}>
         <Router>
           <Nav />
-
           <div>
             <Routes>
+              {/* <Route exact path="/home">
+                <Home />
+                <Classes />
+              </Route> */}
               <Route path="/" element={<Home />} />
               <Route path="/auth/register" element={<Register />} />
               <Route path="/auth/login" element={<Login setUser={setUser} />} />
               <Route
                 path="/classes"
-                element={<Classes setClassRev={setClassRev} />}
+                element={<Classes classRev={classRev} />}
               />
               <Route path="/account" element={<Account />} />
-              <Route path="/classes/:classId/reviews" element={<Reviews />} />
+              <Route
+                path="/reviews"
+                element={
+                  <Reviews
+                    setAllReviews={setAllReviews}
+                    allReviews={allReviews}
+                    userReviews={userReviews}
+                    setClassRev={setClassRev}
+                  />
+                }
+              />
+              <Route
+                path="/classes/:classId/reviews"
+                element={
+                  <SingleClassRev
+                    setClassRev={setClassRev}
+                    classRev={classRev}
+                  />
+                }
+              />
+              <Route path="/myreviews" element={<MyReviews />} />
+              {/* <Route
+                path="/classes/:classId/reviews/:id"
+                element={<Reviews />}
+              /> */}
             </Routes>
           </div>
         </Router>
