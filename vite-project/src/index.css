@@ -15,7 +15,9 @@
 } */
 
 
-:root {background-color: #c1c4f7;
+:root {
+  /* background-image: url('https://www.vecteezy.com/png/28115030-yellow-flower-cartoon-illustration'); */
+  background-color: #c1c4f7;
 
 }
 
@@ -40,7 +42,9 @@ label{
 .classRev{
   display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-around;
+      list-style-type: none; 
+
 }
 
 #title{
@@ -79,19 +83,29 @@ label{
 .nav-item{
   display: flex;
 }
-ul.allRevs{
-  display: flex;
-  list-style-type: none;
-
+.allRevs{
+  display: grid;
+  list-style-type: none; 
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr)); 
 }
-/* .form-group{
-  width: 300px;
-  padding-left: 50px;
+.revDisplay{
+  border: 2px solid black;
   margin: 10px;
- 
+}
+.allReviews{
+  border: 5px solid black;
+}
+.accountClasses{
+  display: flex; 
+  flex-direction: column; 
+}
 
- 
-}  */
+.classILDisplay{
+  border: 2px solid black;
+  margin: 14px;
+}
   form.formClass{
    display: flex;
    flex-direction: column;
@@ -141,11 +155,11 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.5em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: rgba(128, 128, 128, 0.442);
+  background-color: rgba(127, 124, 124, 0.708);
   cursor: pointer;
   transition: border-color 0.25s;
 }

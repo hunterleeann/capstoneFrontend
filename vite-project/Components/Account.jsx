@@ -3,31 +3,31 @@ import axios from "axios";
 import Reviews from "./Reviews";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+import Logout from "./Logout";
 
 export default function Account() {
   const [accountData, setAccountData] = useState(null);
   const navigate = useNavigate();
   const [userReviews, setUserReviews] = useState();
 
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await axios.get("http://localhost:3032/account", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Fetched user:", res.data);
+      setAccountData(res.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-
-      try {
-        const res = await axios.get("http://localhost:3032/account", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        console.log("Fetched user:", res.data);
-        setAccountData(res.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -44,6 +44,7 @@ export default function Account() {
           },
         }
       );
+      fetchData();
       console.log(" data:", res.data);
     } catch (error) {
       console.error("Error:", error);
@@ -62,7 +63,7 @@ export default function Account() {
             },
           }
         );
-        setUserReviews(response.data);
+        setUserReviews(response.data); 
         console.log("test", response.data);
       } catch (error) {
         console.error("Error:", error);
@@ -77,20 +78,21 @@ export default function Account() {
       {accountData ? (
         <>
           <p>
-            <strong>Name:</strong> {accountData.userName}
+            <strong>Username:</strong> {accountData.userName}
           </p>
           <p>
             <strong>Email:</strong> {accountData.email}
           </p>
+          <Logout />
           <h2>Classes:</h2>
           {Array.isArray(accountData.classes) &&
           accountData.classes.length > 0 ? (
-            <ul>
+            <ul className="accountClasses">
               {accountData.classes.map((classItem) => (
                 <li key={classItem.classId}>
                   <strong>{classItem.classType}</strong> - {classItem.day} at{" "}
                   {classItem.hour}
-                  <button onClick={() => unenroll(classItem.classId)}>
+                  <button onClick={() => unenroll(classItem.classId) }>
                     Unenroll
                   </button>
                 </li>
@@ -101,15 +103,15 @@ export default function Account() {
           )}
         </>
       ) : (
-        <p>Please login</p>
+        <p>Loading...</p>
       )}
 
       <h3>My Reviews</h3>
 
       {Array.isArray(userReviews) && userReviews.length > 0 ? (
-        <ul>
+        <ul className="allRevs">
           {userReviews.map((rev) => (
-            <li key={rev.id} style={{ margin: 10, border: "1px solid #ccc" }}>
+            <li className="revDisplay" key={rev.id}>
               {console.log(rev.class.classType)}
               <p>Class: {rev.class.classType}</p>
               <p>Score: {rev.score}</p>
@@ -118,7 +120,7 @@ export default function Account() {
           ))}
         </ul>
       ) : (
-        <p>No reviews</p>
+        <p>No reviews</p> 
       )}
     </div>
   );

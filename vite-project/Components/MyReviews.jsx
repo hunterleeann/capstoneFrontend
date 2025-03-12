@@ -35,9 +35,9 @@ export default function MyReviews() {
       <h3>My Reviews</h3>
 
       {Array.isArray(userReviews) && userReviews.length > 0 ? (
-        <ul>
+        <ul className="allRevs">
           {userReviews.map((rev) => (
-            <li key={rev.id} style={{ margin: 10, border: "1px solid #ccc" }}>
+            <li className="revDisplay" key={rev.id}>
               <p>Class: {rev.class.classType}</p>
               <p>Score: {rev.score}</p>
               <p>Comment: {rev.comment}</p>

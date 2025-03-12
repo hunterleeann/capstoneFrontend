@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav({ isLoggedIn }) {
   return (
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -8,17 +8,6 @@ export default function Nav() {
           <a className="navbar-brand" href="/home">
             Fitness With Jill!
           </a>
-          {/* <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button> */}
           <div id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -30,9 +19,11 @@ export default function Nav() {
               <li className="nav-item">
                 <Link to="/classes">Classes</Link>
               </li>
-              <li className="nav-item">
-                <Link to="/account">Account</Link>
-              </li>
+              {isLoggedIn ? (
+          <li className="nav-item">
+            <Link to="/account">Account</Link>
+          </li>
+        ) : null}
               <li className="nav-item">
                 <Link to="/reviews">Reviews</Link>
               </li>

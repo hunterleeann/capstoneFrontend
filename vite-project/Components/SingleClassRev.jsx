@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import LeaveARev from "./LeaveARev";
 
 
-export default function SingleClassRev() {
+export default function SingleClassRev({isLoggedIn}) {
   const { classId } = useParams(); 
   const navigate = useNavigate(); 
   const [classRev, setClassRev] = useState();
 
-  useEffect(() => {
+
     const fetchReviews = async () => {
       const token = localStorage.getItem("token");
       try {
@@ -24,31 +24,35 @@ export default function SingleClassRev() {
           }
         );
         setClassRev(response.data);
-        console.log("Fetched reviews:", response.data); // Check the response
+        console.log("Fetched reviews:", response.data); 
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
     };
-
+    useEffect(() => {
     fetchReviews();
   }, [classId]); 
   console.log("please", classRev);
 
+  const refreshReviews = () => {
+    fetchReviews(); 
+  };
   return (
     <div>
-      <LeaveARev/>
+    {isLoggedIn ? ( <LeaveARev refreshReviews={refreshReviews}/> ) : null}
       {Array.isArray(classRev) && classRev.length > 0 ? (
-        <ul>
+        <ul className="allRevs"> 
           {classRev.map((rev) => (
-            <li key={rev.id} style={{ margin: 10, border: "1px solid #ccc" }}>
+            <li className="revDisplay" key={rev.id}>
               {/* {console.log(rev.class.classType)} */}
               <p>Class: {rev.class.classType}</p>
               <p>Username: {rev.user.userName}</p>
               <p>Score: {rev.score}</p>
               <p>Comment: {rev.comment}</p>
             </li>
+            
           ))}
-        </ul>
+        </ul> 
       ) : (
         <p>No reviews</p>
       )}

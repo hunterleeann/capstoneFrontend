@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
-export default function LeaveARev() {
+
+export default function LeaveARev({refreshReviews}) {
     const [form, setForm] = useState({ score: 0, comment: ""});
     const { classId } = useParams();
 
@@ -26,7 +27,8 @@ export default function LeaveARev() {
                 Authorization: `Bearer ${token}`,
               },
             }
-          );
+          ); 
+          refreshReviews();
           console.log(response.data);
         } catch (error) {
           console.error( error);
@@ -39,31 +41,14 @@ export default function LeaveARev() {
           ...prev,
           [name]: name === "score" ? Number(value) : value,
         }));
-      };
+      }; 
+
+      
+
   return (
-    <div>
-        <h3>Leave a review!</h3>
+     <div>
+     <h3>Leave a review!</h3>
       <form onSubmit={submit}  className="revForm">
-        <div>
-          {/* <select value={selectedClassId} onChange={handleClassChange}>
-            <option value="">Select a class</option>
-            {classes.map((classItem) => (
-              <option key={classItem.classId} value={classItem.classId}>
-                {classItem.classType}
-              </option>
-            ))}
-          </select> */}
-           
-             {/*
-          <input
-            type="text"
-            className="form-control"
-            id="ClassName"
-            placeholder="Enter Class Name"
-            name="ClassName"
-            onChange={change}
-          /> */}
-        </div>
         <div className="form-group">
           <label>Score</label>
           <input
@@ -89,7 +74,7 @@ export default function LeaveARev() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
-    </div>
+      </form> 
+    </div> 
   )
 }

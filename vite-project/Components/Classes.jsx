@@ -6,7 +6,7 @@ import Reviews from "./Reviews";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function Classes({ classRev }) {
+export default function Classes({isLoggedIn }) {
   const { /*data: queryData,*/ isLoading } = useGetClassesQuery();
   const [classes, setClasses] = useState([]);
   //const [classRev, setClassRev] = useState();
@@ -70,16 +70,17 @@ export default function Classes({ classRev }) {
       {isLoading && <p>Loading classes...</p>}
       <ul id="classesDisplay">
         {classes?.map((classItem) => (
-          <li key={classItem.classId}>
+          <li className="classILDisplay" key={classItem.classId}>
             <h3>{classItem.classType}</h3>
             <p>
               <strong>Time: </strong> {classItem.hour}
-
+              </p> 
+              <p>
               <strong>Day:</strong> {classItem.day}
             </p>
             <p>{classItem.description}</p>
             {/* <p>Likes: {classItem.likes}</p>  */}
-            <button onClick={() => putClass(classItem.classId)}>Enroll</button>
+            {isLoggedIn ? ( <button onClick={() => putClass(classItem.classId)}>Enroll</button> ) : null}
             <button
               onClick={() =>
                 /*setClassRev(classItem.classId)*/ navigate(

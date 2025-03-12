@@ -142,15 +142,8 @@ export default function Reviews({
       </ul>
       {isLoading && <li>Loading reviews...</li>}
       {data?.map((review) => (
-        <div
+        <div className="allReviews"
           key={review.id}
-          style={{
-            border: "1px solid black",
-            padding: "16px",
-            marginBottom: "10px",
-            borderRadius: "8px",
-            backgroundColor: "black",
-          }}
         >
           {/* <h2>{review.classType}</h2> */}
           <p>Username: {review.user.userName}</p>
@@ -162,9 +155,9 @@ export default function Reviews({
       {Array.isArray(allReviews) && allReviews.length > 0 ? (
         <ul className="allRevs">
           {allReviews.map((allRev) => (
-            <li
+            <li className="revDisplay"
               key={allRev.id}
-              style={{ margin: 10, border: "1px solid #ccc" }}
+            
             >
               {/* {console.log(allRev.class.classType)} */}
               <p>Class: {allRev.class.classType}</p>
