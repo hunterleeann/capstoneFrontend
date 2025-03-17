@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGetUserQuery } from "./RegisterSlice"; 
 import Account from "../Components/Account";
+import Nav from "./Nav";
 
 
 export default function Login() {
@@ -31,7 +32,8 @@ export default function Login() {
       const token = response.data; 
       localStorage.setItem("token", token);
       console.log("Login Response:", response.data);
-      navigate("/account")
+      window.location.href = '/account';
+      // navigate("/account")
     } catch (error) {
       console.error("Login Error:", error); 
       alert("Incorrect username or password");

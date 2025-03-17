@@ -170,7 +170,7 @@ export default function Reviews({
           ))}
         </ul>
       ) : (
-        <p>Please login to view your reviews.</p>
+        <p>No reviews</p>
       )}
    
 

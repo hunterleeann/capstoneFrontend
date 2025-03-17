@@ -11,7 +11,9 @@ import Classes from "../Components/Classes";
 import Account from "../Components/Account";
 import Reviews from "../Components/Reviews";
 import MyReviews from "../Components/MyReviews";
-import SingleClassRev from "../Components/SingleClassRev";
+import SingleClassRev from "../Components/SingleClassRev"; 
+import { ProtectedRoute } from "../Components/protectedRoute";
+
 import Logout from "../Components/Logout";
 //import './styles.css';
 
@@ -24,6 +26,7 @@ function App() {
   const [allReviews, setAllReviews] = useState();
   const [classRev, setClassRev] = useState(); 
   const [refresh, setRefresh] = useState(0); 
+  
 
 
 
@@ -35,10 +38,12 @@ function App() {
 
   return (
     <>
+    <div className="main">
       <Provider store={store}>
+        <main>
         <Router>
           <Nav isLoggedIn={isLoggedIn} />
-          <div>
+          <div >
             <Routes>
               {/* <Route exact path="/home">
                 <Home />
@@ -51,9 +56,12 @@ function App() {
                 path="/classes"
                 element={<Classes classRev={classRev} isLoggedIn={isLoggedIn} />}
               />
-             {isLoggedIn ? (
-                <Route path="/account" element={<Account />} />
-              ) : null}
+
+              {/* <Route path="/account" element={<protectedRoute />}> */}
+
+              ( <Route path="/account" element={<Account />} /> ) 
+                {/* </Route> */}
+
               <Route
                 path="/reviews"
                 element={
@@ -82,7 +90,9 @@ function App() {
             </Routes>
           </div>
         </Router>
+        </main>
       </Provider>
+      </div>
     </>
   );
 }

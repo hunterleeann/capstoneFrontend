@@ -4,15 +4,17 @@ import Reviews from "./Reviews";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import Logout from "./Logout";
+import MyClasses from "./MyClasses";
+import ChangeEmail from "./ChangeEmail";
 
 export default function Account() {
   const [accountData, setAccountData] = useState(null);
   const navigate = useNavigate();
-  const [userReviews, setUserReviews] = useState();
+  const [userReviews, setUserReviews] = useState(); 
+  const [newEmail, setNewEmail] = useState(); 
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
-
     try {
       const res = await axios.get("http://localhost:3032/account", {
         headers: {
@@ -47,7 +49,7 @@ export default function Account() {
       fetchData();
       console.log(" data:", res.data);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error); 
     }
   };
   useEffect(() => {
@@ -74,16 +76,19 @@ export default function Account() {
 
   return (
     <div>
+       {/* <MyClasses /> */}
       <h2>Account Details</h2>
       {accountData ? (
         <>
+        
           <p>
             <strong>Username:</strong> {accountData.userName}
           </p>
           <p>
             <strong>Email:</strong> {accountData.email}
-          </p>
-          <Logout />
+          </p> 
+          {/* <ChangeEmail setNewEmail={setNewEmail}/> */}
+          <Logout /> 
           <h2>Classes:</h2>
           {Array.isArray(accountData.classes) &&
           accountData.classes.length > 0 ? (

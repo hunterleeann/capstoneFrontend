@@ -5,27 +5,30 @@ import PropTypes from "prop-types";
 import Reviews from "./Reviews";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import MyClasses from "./MyClasses";
 
-export default function Classes({isLoggedIn }) {
+export default function Classes({ isLoggedIn }) {
   const { /*data: queryData,*/ isLoading } = useGetClassesQuery();
   const [classes, setClasses] = useState([]);
   //const [classRev, setClassRev] = useState();
   const navigate = useNavigate();
-  const [likes, setLikes] = useState(0);
+  
+  // let newDiv = document.createElement("div");
+
+  // useEffect(() => {
+  const fetchDataClass = async () => {
+    try {
+      const response = await axios.get("http://localhost:3032/classes");
+      console.log("Fetched Data:", response.data);
+
+      setClasses(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3032/classes");
-        console.log("Fetched Data:", response.data);
-
-        setClasses(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    fetchDataClass();
   }, []);
 
   const putClass = async (classId) => {
@@ -42,6 +45,11 @@ export default function Classes({isLoggedIn }) {
           },
         }
       );
+      // newDiv.innerHTML = "";
+
+      // newDiv.innerHTML = "Enrolled!";
+      // document.body.appendChild(newDiv);
+      // fetchDataClass();
       console.log("Successfully Enrolled:", res.data);
     } catch (error) {
       console.error(
@@ -56,7 +64,7 @@ export default function Classes({isLoggedIn }) {
   //       const token = localStorage.getItem("token");
   //       setLikes(likes + 1);
 
-  //     const res = await axios.patch( 
+  //     const res = await axios.patch(
   //       `http://localhost:3032/classes`, { likes: likes + 1 });
   //     console.log("Like", res.data);
   //   } catch (error) {
@@ -74,13 +82,17 @@ export default function Classes({isLoggedIn }) {
             <h3>{classItem.classType}</h3>
             <p>
               <strong>Time: </strong> {classItem.hour}
-              </p> 
-              <p>
+            </p>
+            <p>
               <strong>Day:</strong> {classItem.day}
             </p>
             <p>{classItem.description}</p>
             {/* <p>Likes: {classItem.likes}</p>  */}
-            {isLoggedIn ? ( <button onClick={() => putClass(classItem.classId)}>Enroll</button> ) : null}
+            {isLoggedIn ? (
+              <button onClick={() => putClass(classItem.classId)}>
+                Enroll
+              </button>
+            ) : null}
             <button
               onClick={() =>
                 /*setClassRev(classItem.classId)*/ navigate(
@@ -89,11 +101,12 @@ export default function Classes({isLoggedIn }) {
               }
             >
               Reviews
-            </button> 
+            </button>
             {/* <button onClick={() => addLike(classItem.classType)}> Like</button> */}
           </li>
         ))}
       </ul>
+      {/* <MyClasses classes={classes} /> */}
     </div>
   );
 }

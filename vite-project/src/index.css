@@ -13,126 +13,233 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 } */
-
-
-:root {
-  /* background-image: url('https://www.vecteezy.com/png/28115030-yellow-flower-cartoon-illustration'); */
-  background-color: #c1c4f7;
-
+.main {
+  /* background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),
+  url("/public/IMG_2622.JPG");  */
+  background-size: 150px;
+  background-attachment: fixed;
 }
 
+:root {
+  /* background-color: #696cb7; */
+  background-image:
+  url("/IMG_2622.JPG");
+  /* background-size: 1000px; */
+  background-size: 100%;
+}
+
+/* .four{
+  object-position: right top;
+} */
+
+/* .images{
+  display: flex;
+  justify-content: space-evenly; 
+  flex-wrap: wrap; 
+  align-items: flex-start;
+} */
+
+/* .images{
+  margin: 0 auto; 
+  overflow: hidden;
+  vertical-align: top; 
+  display: grid;
+} */
+
+/* .images {
+  display: grid;
+ 
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-gap: 5px;
+  scroll-snap-type: x mandatory;
+} */
+
+.ScrollMandatory {
+  scroll-snap-type: x mandatory;
+}
+.one {
+  display: flex;
+  margin: auto;
+  border: 5px solid black;
+  /* width: 50%; */
+  /* grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    border: 4px solid black; */
+}
+
+.two {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  border: 4px solid black;
+}
+
+.three {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  border: 4px solid black;
+}
+
+.four {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  border: 4px solid black;
+}
+
+.five {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  border: 4px solid black;
+  width: 500px;
+}
+
+.aboutMeTxt {
+  width: 80%;
+  display: flex;
+  /* padding-top: 20px; */
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
+  margin: auto;
+  word-spacing: 5px;
+  font-size: 20px;
+  /* background-color: #8388ed; */
+}
+
+/* .bottomHalf{
+  background-color: #8388ed;
+} */
+
+/* .images{
+ display: flex; 
+ align-items: flex-start;
+ border: 2px solid black; 
+ flex-wrap: wrap;
+ flex-direction: column-reverse;
+} */
 
 #navbarNav {
   list-style-type: none;
   display: inline;
-  width: 300px; 
-  background-color: blue;  
-} 
+  width: 300px;
+  /* background-color: #c1c4f7;  */
+  /* text-shadow: 1px 1px black; */
+  color: black;
+}
 
-#nav-item{
+#nav-item {
   display: flex;
 }
 
-label{
+label {
   display: flex;
   padding: 5px;
   justify-content: space-between;
-} 
+}
 
-.classRev{
+.classRev {
   display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      list-style-type: none; 
-
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  /* background-color: white; */
 }
 
-#title{
+#title {
   justify-content: center;
-} 
-
-.navbar-nav{
-      display: flex;
-      flex-direction: row;
-      align-content: center;
-      justify-content: space-evenly;
-      align-items: stretch;
-      flex-wrap: wrap;
 }
 
-.navbar-brand{
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.navbar-brand {
   display: flex;
   font-size: 40px;
-    align-content: center;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    flex-direction: row-reverse;
-    justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+  justify-content: center;
 }
 
-.revForm{
-  display: flex; 
+.revForm {
+  display: flex;
   justify-content: flex-start;
   align-content: flex-start;
-  align-items: flex-start; 
-  
+  align-items: flex-start;
+
   flex-direction: column;
+  /* background-color: #9195e7; */
   /* float: left; */
 }
 
-.nav-item{
+.nav-item {
   display: flex;
 }
-.allRevs{
+.allRevs {
   display: grid;
-  list-style-type: none; 
+  list-style-type: none;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
 }
-.revDisplay{
-  border: 2px solid black;
+.revDisplay {
+  border: 2px solid #b298e9;
   margin: 10px;
+  background-color: white;
 }
-.allReviews{
+.allReviews {
   border: 5px solid black;
 }
-.accountClasses{
-  display: flex; 
-  flex-direction: column; 
+.accountClasses {
+  display: flex;
+  flex-direction: column;
 }
 
-.classILDisplay{
+.classILDisplay {
   border: 2px solid black;
   margin: 14px;
+  background-color: white;
 }
-  form.formClass{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 50%;
-   margin: auto;
-   padding-top: 270px;
-  }
+form.formClass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  padding-top: 270px;
+}
 
-#classesDisplay{
-  margin: auto; 
+#classesDisplay {
+  margin: auto;
   flex-wrap: revert-layer;
-    display: inline-flex;
-    list-style-type: none;
+  display: inline-flex;
+  list-style-type: none;
 }
 
 form {
   font-weight: 500;
 }
 
-.navbarNav {
-  background-color: green;
-}
-
 a {
   font-weight: 500;
-  color: #646cff;
+  color: black;
   text-decoration: inherit;
 }
 a:hover {
@@ -159,7 +266,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: rgba(127, 124, 124, 0.708);
+  background-color: #c59df4;
   cursor: pointer;
   transition: border-color 0.25s;
 }
