@@ -6,12 +6,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 import MyClasses from "./MyClasses";
 import ChangeEmail from "./ChangeEmail";
+import EditReview from "./EditReview";
 
-export default function Account() {
+export default function Account({DelRev}) {
   const [accountData, setAccountData] = useState(null);
   const navigate = useNavigate();
-  const [userReviews, setUserReviews] = useState(); 
-  const [newEmail, setNewEmail] = useState(); 
+  const [userReviews, setUserReviews] = useState();
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
@@ -49,7 +49,7 @@ export default function Account() {
       fetchData();
       console.log(" data:", res.data);
     } catch (error) {
-      console.error("Error:", error); 
+      console.error("Error:", error);
     }
   };
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function Account() {
             },
           }
         );
-        setUserReviews(response.data); 
+        setUserReviews(response.data);
         console.log("test", response.data);
       } catch (error) {
         console.error("Error:", error);
@@ -75,20 +75,19 @@ export default function Account() {
   }, []);
 
   return (
-    <div>
-       {/* <MyClasses /> */}
+    <div className="accountDetails">
+      {/* <MyClasses /> */}
       <h2>Account Details</h2>
       {accountData ? (
         <>
-        
           <p>
             <strong>Username:</strong> {accountData.userName}
           </p>
           <p>
             <strong>Email:</strong> {accountData.email}
-          </p> 
-          {/* <ChangeEmail setNewEmail={setNewEmail}/> */}
-          <Logout /> 
+          </p>
+          <ChangeEmail />
+          <Logout />
           <h2>Classes:</h2>
           {Array.isArray(accountData.classes) &&
           accountData.classes.length > 0 ? (
@@ -97,7 +96,7 @@ export default function Account() {
                 <li key={classItem.classId}>
                   <strong>{classItem.classType}</strong> - {classItem.day} at{" "}
                   {classItem.hour}
-                  <button onClick={() => unenroll(classItem.classId) }>
+                  <button onClick={() => unenroll(classItem.classId)}>
                     Unenroll
                   </button>
                 </li>
@@ -112,21 +111,7 @@ export default function Account() {
       )}
 
       <h3>My Reviews</h3>
-
-      {Array.isArray(userReviews) && userReviews.length > 0 ? (
-        <ul className="allRevs">
-          {userReviews.map((rev) => (
-            <li className="revDisplay" key={rev.id}>
-              {console.log(rev.class.classType)}
-              <p>Class: {rev.class.classType}</p>
-              <p>Score: {rev.score}</p>
-              <p>Comment: {rev.comment}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No reviews</p> 
-      )}
+      <EditReview userReviews={userReviews} setUserReviews={setUserReviews}/>
     </div>
   );
 }

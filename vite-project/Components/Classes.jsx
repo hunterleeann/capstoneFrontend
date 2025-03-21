@@ -10,12 +10,9 @@ import MyClasses from "./MyClasses";
 export default function Classes({ isLoggedIn }) {
   const { /*data: queryData,*/ isLoading } = useGetClassesQuery();
   const [classes, setClasses] = useState([]);
-  //const [classRev, setClassRev] = useState();
+  const [accountData, setAccountData] = useState([]);
   const navigate = useNavigate();
-  
-  // let newDiv = document.createElement("div");
 
-  // useEffect(() => {
   const fetchDataClass = async () => {
     try {
       const response = await axios.get("http://localhost:3032/classes");
@@ -45,12 +42,8 @@ export default function Classes({ isLoggedIn }) {
           },
         }
       );
-      // newDiv.innerHTML = "";
-
-      // newDiv.innerHTML = "Enrolled!";
-      // document.body.appendChild(newDiv);
-      // fetchDataClass();
       console.log("Successfully Enrolled:", res.data);
+      fetchUserData();
     } catch (error) {
       console.error(
         "Error enrolling in class:",
@@ -58,6 +51,27 @@ export default function Classes({ isLoggedIn }) {
       );
     }
   };
+
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await axios.get("http://localhost:3032/account", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Fetched user:", res.data);
+      setAccountData(res.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   // const addLike = async () => {
   //   try {
@@ -71,6 +85,9 @@ export default function Classes({ isLoggedIn }) {
   //     console.error()
   //   }
   // };
+  //   const refresh = () => {
+  //     fetchDataClass();
+  // }
 
   return (
     <div>
@@ -106,12 +123,40 @@ export default function Classes({ isLoggedIn }) {
           </li>
         ))}
       </ul>
-      {/* <MyClasses classes={classes} /> */}
+      <div>
+      {isLoggedIn && (
+        <>
+        <h2>Enrolled classes</h2>
+        {Array.isArray(accountData.classes) &&
+        accountData.classes.length > 0 ? (
+          <ul className="accountClasses">
+            {accountData.classes.map((classItem) => (
+              <li key={classItem.classId}>
+                <strong>{classItem.classType}</strong> - {classItem.day} at{" "}
+                {classItem.hour}
+                {/* <button onClick={() => unenroll(classItem.classId)}>
+                Unenroll
+              </button> */}
+              </li>
+            ))}
+            <p>
+              *To unenroll, please go to your{" "}
+              <Link to="/account" style={{ color: "blue" }}>
+                account
+              </Link>{" "}
+              page.
+            </p>
+          </ul>
+        ) : (
+          <p>No enrolled classes</p>
+        )}
+        </>
+        )}
+        
+        {/* <p>*To unenroll, please go to your {<button onClick={() => Navigate(<Account />)></button>}</p> */}
+      </div>
+      {/* {isLoggedIn ? <MyClasses /> : null} */}
     </div>
+    
   );
 }
-// Classes.propTypes = {
-//   user: PropTypes.shape({
-//     id: PropTypes.string, // Change to string if needed
-//   }),
-// };

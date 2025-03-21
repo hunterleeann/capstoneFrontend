@@ -2,37 +2,42 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ChangeEmail(setAccountData) {
-    const [form, setForm] = useState({email: ""});
+  const [email, setEmail] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
-    const updateEmail = async () => {
-        try {
-            const token = localStorage.getItem("token");
+  const updateEmail = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-          const response = await axios.patch("http://localhost:3032/account",{
-            email: form.email
+      const response = await axios.patch(
+        "http://localhost:3032/account",
+        {
+          email: email,
         },
         {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-          console.log("Data:", response.data);
-          setForm(response.data);
-          setAccountData(response.data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      };
-    
-      useEffect(() => {
-        updateEmail();
-      }, []);
+      );
+      console.log("Email:", response.data);
+      //   setEmail(response.data);
+      //   setAccountData(response.data);
+      setShowForm(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div>
-       <form className="changeEmailForm" onSubmit={updateEmail}>
+        {!showForm ? (
+      <button onClick={() => setShowForm(true)} className="btn btn-primary">
+        Change Email
+      </button>
+        ):(
+      <form className="changeEmailForm" onSubmit={updateEmail}>
         <div className="form-group">
           <label>Email address: </label>
           <input
@@ -42,11 +47,14 @@ export default function ChangeEmail(setAccountData) {
             aria-describedby="emailHelp"
             placeholder="Enter email"
             name="email"
-            // onSubmit={updateEmail}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button onClick={updateEmail}>Update email</button>
-        </form>
+        <button type="submit" className="btn btn-primary">
+         Submit
+        </button>
+      </form>
+       )}
     </div>
-  )
+  );
 }

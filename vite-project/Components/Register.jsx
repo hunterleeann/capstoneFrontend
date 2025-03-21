@@ -5,9 +5,9 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Register() {
-  const [registerUser] = useAddUserMutation();
-  const [form, setForm] = useState({ userName: "", email: "", password: "" }); 
-  
+  // const [registerUser] = useAddUserMutation();
+  const [form, setForm] = useState({ userName: "", email: "", password: "" });
+
   // const navigate = useNavigate();
 
   const change = (e) => {
@@ -24,13 +24,16 @@ export default function Register() {
         userName: form.userName,
         email: form.email,
         password: form.password,
-      }); 
-      alert("Registered!")
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      });
+      const token = data; 
+      localStorage.setItem("token", token);
+      console.log("register Response:", data);
+      window.location.href = '/account';
+      // localStorage.setItem("token", data.token);
+      // localStorage.setItem("user", JSON.stringify(data.user));
       console.log("Server Response:", data);
     } catch (error) {
-      console.error(error); 
+      console.error(error);
       alert("Username or email already taken");
     }
   };
@@ -73,7 +76,7 @@ export default function Register() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form> 
+      </form>
       {/* <h3>Hello, {form.userName}</h3> */}
     </div>
   );

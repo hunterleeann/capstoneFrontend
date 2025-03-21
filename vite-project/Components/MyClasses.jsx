@@ -4,10 +4,10 @@ import Reviews from "./Reviews";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function MyClasses({ classes }) {
+export default function MyClasses() {
   const [accountData, setAccountData] = useState([]);
 
-  const fetchData = async () => {
+  const fetchUserData = async () => {
     const token = localStorage.getItem("token");
 
     try {
@@ -19,13 +19,13 @@ export default function MyClasses({ classes }) {
       });
 
       console.log("Fetched user:", res.data);
-      setAccountData(res.data);
+      //setAccountData(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
   useEffect(() => {
-    fetchData();
+    fetchUserData();
   }, []);
 
   return (

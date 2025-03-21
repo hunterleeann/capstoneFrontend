@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 
 export default function LeaveARev({refreshReviews}) {
-    const [form, setForm] = useState({ score: 0, comment: ""});
+    const [form, setForm] = useState({ score: "", comment: ""});
     const { classId } = useParams();
 
 
@@ -29,7 +29,8 @@ export default function LeaveARev({refreshReviews}) {
             }
           ); 
           refreshReviews();
-          console.log(response.data);
+          console.log(response.data); 
+          setForm({ score: 0, comment: "" });
         } catch (error) {
           console.error( error);
         }
@@ -56,7 +57,8 @@ export default function LeaveARev({refreshReviews}) {
             className="form-control"
             id="score"
             placeholder="Enter score"
-            name="score"
+            name="score" 
+            value={form.score}
             onChange={change}
           />
         </div>
@@ -68,6 +70,7 @@ export default function LeaveARev({refreshReviews}) {
             id="comment"
             placeholder="Enter comment"
             name="comment"
+            value={form.comment}
             onChange={change}
           />
         </div>

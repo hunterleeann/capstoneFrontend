@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGetUserQuery } from "./RegisterSlice"; 
-import Account from "../Components/Account";
+import Account from "./Account";
 import Nav from "./Nav";
 
 
