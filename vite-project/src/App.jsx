@@ -15,13 +15,11 @@ import SingleClassRev from "../Components/SingleClassRev";
 import { ProtectedRoute } from "../Components/protectedRoute";
 import MyClasses from "../Components/MyClasses";
 import Logout from "../Components/Logout";
-//import './styles.css';
 
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //const [classRev, setClassRev] = useState();
   const [userReviews, setUserReviews] = useState();
   const [allReviews, setAllReviews] = useState();
   const [classRev, setClassRev] = useState();
@@ -66,11 +64,7 @@ function App() {
               <Nav isLoggedIn={isLoggedIn} />
               <div>
                 <Routes>
-                  {/* <Route exact path="/home">
-                <Home />
-                <Classes />
-              </Route> */}
-                  <Route path="/home" element={<Home />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/auth/register" element={<Register />} />
                   <Route
                     path="/auth/login"
@@ -82,7 +76,6 @@ function App() {
                       <Classes classRev={classRev} isLoggedIn={isLoggedIn} />
                     }
                   />
-                  {/* <Route path="/account" element={<protectedRoute />}> */}({" "}
                   <Route
                     path="/account"
                     element={
@@ -91,8 +84,7 @@ function App() {
                         fetchUserData={fetchUserData}
                       />
                     }
-                  />{" "}
-                  ){/* </Route> */}
+                  />
                   <Route
                     path="/reviews"
                     element={
@@ -115,11 +107,7 @@ function App() {
                       />
                     }
                   />
-                  <Route path="/myreviews" element={<MyReviews />} />
-                  {/* <Route
-                path="/classes/:classId/reviews/:id"
-                element={<Reviews />}
-              /> */}
+                  <Route path="/myReviews" element={<MyReviews />} />
                 </Routes>
               </div>
             </Router>

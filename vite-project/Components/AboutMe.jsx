@@ -24,9 +24,6 @@ export default function AboutMe() {
           </h4>
         </strong>
       </section>
-
-      {/* image array? or collection of immages  */}
-      {/* <img href=""></img> */}
       <div className="images">
         <img
           className="one"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function ChangeEmail(setAccountData) {
+export default function ChangeEmail() {
   const [email, setEmail] = useState("");
   const [showForm, setShowForm] = useState(false);
 
@@ -21,9 +21,7 @@ export default function ChangeEmail(setAccountData) {
           },
         }
       );
-      console.log("Email:", response.data);
-      //   setEmail(response.data);
-      //   setAccountData(response.data);
+      // console.log("Email:", response.data);
       setShowForm(false);
     } catch (error) {
       console.error("Error fetching data:", error);

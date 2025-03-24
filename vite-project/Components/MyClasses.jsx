@@ -18,7 +18,7 @@ export default function MyClasses() {
         },
       });
 
-      console.log("Fetched user:", res.data);
+      // console.log("Fetched user:", res.data);
       //setAccountData(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -37,16 +37,12 @@ export default function MyClasses() {
             <li key={classItem.classId}>
               <strong>{classItem.classType}</strong> - {classItem.day} at{" "}
               {classItem.hour}
-              {/* <button onClick={() => unenroll(classItem.classId)}>
-                Unenroll
-              </button> */}
             </li>
           ))}
         </ul>
       ) : (
         <p>No enrolled classes</p>
       )}
-      {/* <p>*To unenroll, please go to your {<button onClick={() => Navigate(<Account />)></button>}</p> */}
     </div>
   );
 }

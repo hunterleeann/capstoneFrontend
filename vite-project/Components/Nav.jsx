@@ -5,7 +5,7 @@ export default function Nav({ isLoggedIn }) {
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/home">
+          <a className="navbar-brand" href="/">
             <img src="/IMG_2626.PNG" width="500px"></img>
           </a>
           <div id="navbarNav">
@@ -35,23 +35,6 @@ export default function Nav({ isLoggedIn }) {
           </div>
         </div>
       </nav>
-      {/* <ul classNameName="nav">
-        <li classNameName="nav-item">
-          <Link to="/auth/register">Register</Link>
-        </li>
-        <li classNameName="nav-item">
-          <Link to="/auth/login">Login</Link>
-        </li>
-        <li classNameName="nav-item">
-          <Link to="/classNamees">classNamees</Link>
-        </li>
-        <li classNameName="nav-item">
-          <Link to="/account">Account</Link>
-        </li>
-        <li classNameName="nav-item">
-          <Link to="/classNamees/:classNameId/reviews">Reviews</Link>
-        </li>
-      </ul> */}
     </div>
   );
 }

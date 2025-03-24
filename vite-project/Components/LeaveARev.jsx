@@ -19,7 +19,6 @@ export default function LeaveARev({refreshReviews}) {
             {
               score: form.score,
               comment: form.comment,
-             // classType: form.classType,
             },
             {
               headers: {
@@ -29,7 +28,7 @@ export default function LeaveARev({refreshReviews}) {
             }
           ); 
           refreshReviews();
-          console.log(response.data); 
+          // console.log(response.data); 
           setForm({ score: 0, comment: "" });
         } catch (error) {
           console.error( error);

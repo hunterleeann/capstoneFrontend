@@ -33,7 +33,7 @@ export default function Reviews({
           }
         );
         setUserReviews(response.data);
-        console.log("test1", response.data);
+        // console.log("test1", response.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -59,7 +59,7 @@ export default function Reviews({
           }
         );
         setClassRev(response.data);
-        console.log("GetRevs", response.data);
+        // console.log("GetRevs", response.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -78,7 +78,7 @@ export default function Reviews({
           },
         });
         setAllReviews(response.data);
-        console.log("GetRevs", response.data);
+        // console.log("GetRevs", response.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -95,7 +95,7 @@ export default function Reviews({
       {isLoggedIn ? (
         <button
           onClick={() =>
-            /*setClassRev(classItem.classId)*/ navigate(`/myreviews`)
+             navigate(`/myReviews`)
           }
         >
           My Reviews
@@ -137,9 +137,7 @@ export default function Reviews({
         <ul className="allRevs">
           {allReviews.map((allRev) => (
             <li className="revDisplay" key={allRev.id}>
-              {/* {console.log(allRev.class.classType)} */}
               <p>Class: {allRev.class.classType}</p>
-              {/* <p>Date: {allRev.date}</p> */}
               <p>Username: {allRev.user.userName}</p>
               <p>Score: {allRev.score}</p>
               <p>Comment: {allRev.comment}</p>
@@ -149,8 +147,6 @@ export default function Reviews({
       ) : (
         <p>No reviews</p>
       )}
-
-      {/* <h3>My Reviews</h3> */}
     </div>
   );
 }

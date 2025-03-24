@@ -23,9 +23,9 @@ export default function EditRev({ userReviews, setUserReviews }) {
           },
         }
       );
-      console.log("edited data:", res.data); 
+    //   console.log("edited data:", res.data);
       setSelectedRev(null);
-      window.location.href = '/myreviews';
+      window.location.href = "/account";
 
       //   setUserReviews((prevReviews) =>
       //     prevReviews.filter((rev) => rev.id !== revId)
@@ -47,11 +47,12 @@ export default function EditRev({ userReviews, setUserReviews }) {
           },
         }
       );
-      console.log("Deleted data:", res.data);
+    //   console.log("Deleted data:", res.data);
 
       setUserReviews((prevReviews) =>
         prevReviews.filter((rev) => rev.id !== revId)
       );
+      window.location.href = "/account";
     } catch (error) {
       console.error("Error:", error);
     }
@@ -65,8 +66,6 @@ export default function EditRev({ userReviews, setUserReviews }) {
       [name]: name === "score" ? Number(value) : value,
     }));
   };
-
-  //   != null
 
   return (
     <div>

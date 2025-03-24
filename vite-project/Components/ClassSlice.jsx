@@ -28,13 +28,6 @@ const classApi = api.injectEndpoints({
         }),
         providesTag: ["Class"],
       }),
-    // getUser: builder.query({
-    //   query: () => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //   }),
-    //   providesTags: ["User"],
-    // }), 
   }),
   
 });

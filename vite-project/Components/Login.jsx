@@ -26,14 +26,11 @@ export default function Login() {
         email: form.email,
         password: form.password,
       });
-      //setIsLoggedIn(true); 
-      //alert("Logged in!");
       console.log(response.data);
       const token = response.data; 
       localStorage.setItem("token", token);
-      console.log("Login Response:", response.data);
+      // console.log("Login Response:", response.data);
       window.location.href = '/account';
-      // navigate("/account")
     } catch (error) {
       console.error("Login Error:", error); 
       alert("Incorrect username or password");

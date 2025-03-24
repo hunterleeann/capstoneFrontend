@@ -11,15 +11,12 @@ export default function Classes({ isLoggedIn }) {
   const { data: queryData, isLoading } = useGetClassesQuery();
   const [classes, setClasses] = useState([]);
   const [accountData, setAccountData] = useState([]);
-  const navigate = useNavigate();
-
-
-console.log("wooo:", queryData); 
+  const navigate = useNavigate(); 
 
   const fetchDataClass = async () => {
     try {
       const response = await axios.get("https://capstonebackend-u3uj.onrender.com/classes");
-      console.log("Fetched Data:", response.data);
+      // console.log("Fetched Data:", response.data);
 
       setClasses(response.data);
     } catch (error) {
@@ -37,7 +34,7 @@ console.log("wooo:", queryData);
 
       const res = await axios.put(
         `https://capstonebackend-u3uj.onrender.com/classes/${classId}`,
-        {}, // No body needed
+        {}, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -45,7 +42,7 @@ console.log("wooo:", queryData);
           },
         }
       );
-      console.log("Successfully Enrolled:", res.data);
+      // console.log("Successfully Enrolled:", res.data);
       fetchUserData();
     } catch (error) {
       console.error(
@@ -66,7 +63,7 @@ console.log("wooo:", queryData);
         },
       });
 
-      console.log("Fetched user:", res.data);
+      // console.log("Fetched user:", res.data);
       setAccountData(res.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -91,22 +88,19 @@ console.log("wooo:", queryData);
               <strong>Day:</strong> {classItem.day}
             </p>
             <p>{classItem.description}</p>
-            {/* <p>Likes: {classItem.likes}</p>  */}
             {isLoggedIn ? (
               <button onClick={() => putClass(classItem.classId)}>
                 Enroll
               </button>
             ) : null}
             <button
-              onClick={() =>
-                /*setClassRev(classItem.classId)*/ navigate(
+              onClick={() => navigate(
                   `/classes/${classItem.classId}/reviews`
                 )
               }
             >
               Reviews
             </button>
-            {/* <button onClick={() => addLike(classItem.classType)}> Like</button> */}
           </li>
         ))}
       </ul>
@@ -121,9 +115,6 @@ console.log("wooo:", queryData);
               <li key={classItem.classId}>
                 <strong>{classItem.classType}</strong> - {classItem.day} at{" "}
                 {classItem.hour}
-                {/* <button onClick={() => unenroll(classItem.classId)}>
-                Unenroll
-              </button> */}
               </li>
             ))}
             <p>
@@ -139,10 +130,7 @@ console.log("wooo:", queryData);
         )}
         </>
         )}
-        
-        {/* <p>*To unenroll, please go to your {<button onClick={() => Navigate(<Account />)></button>}</p> */}
       </div>
-      {/* {isLoggedIn ? <MyClasses /> : null} */}
     </div>
     
   );

@@ -1,14 +1,11 @@
 import React from "react";
 import { useAddUserMutation } from "./RegisterSlice";
 import { useState } from "react";
-//import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 export default function Register() {
-  // const [registerUser] = useAddUserMutation();
   const [form, setForm] = useState({ userName: "", email: "", password: "" });
-
-  // const navigate = useNavigate();
 
   const change = (e) => {
     setForm((prev) => ({
@@ -27,7 +24,7 @@ export default function Register() {
       });
       const token = data; 
       localStorage.setItem("token", token);
-      console.log("register Response:", data);
+      // console.log("register Response:", data);
       window.location.href = '/account';
       // localStorage.setItem("token", data.token);
       // localStorage.setItem("user", JSON.stringify(data.user));
@@ -77,7 +74,6 @@ export default function Register() {
           Submit
         </button>
       </form>
-      {/* <h3>Hello, {form.userName}</h3> */}
     </div>
   );
 }
