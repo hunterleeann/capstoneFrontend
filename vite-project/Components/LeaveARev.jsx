@@ -15,7 +15,7 @@ export default function LeaveARev({refreshReviews}) {
           console.log(token);
           console.log("Sending PUT request with Authorization header:");
           const response = await axios.put(
-            `http://localhost:3032/classes/${classId}/reviews`,
+            `https://capstonebackend-u3uj.onrender.com/classes/${classId}/reviews`,
             {
               score: form.score,
               comment: form.comment,

@@ -10,7 +10,7 @@ export default function ChangeEmail(setAccountData) {
       const token = localStorage.getItem("token");
 
       const response = await axios.patch(
-        "http://localhost:3032/account",
+        "https://capstonebackend-u3uj.onrender.com/account",
         {
           email: email,
         },

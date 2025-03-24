@@ -11,7 +11,7 @@ export default function MyClasses() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.get("http://localhost:3032/account", {
+      const res = await axios.get("https://capstonebackend-u3uj.onrender.com/account", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

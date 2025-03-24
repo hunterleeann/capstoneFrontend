@@ -8,14 +8,17 @@ import { Link } from "react-router-dom";
 import MyClasses from "./MyClasses";
 
 export default function Classes({ isLoggedIn }) {
-  const { /*data: queryData,*/ isLoading } = useGetClassesQuery();
+  const { data: queryData, isLoading } = useGetClassesQuery();
   const [classes, setClasses] = useState([]);
   const [accountData, setAccountData] = useState([]);
   const navigate = useNavigate();
 
+
+console.log("wooo:", queryData); 
+
   const fetchDataClass = async () => {
     try {
-      const response = await axios.get("http://localhost:3032/classes");
+      const response = await axios.get("https://capstonebackend-u3uj.onrender.com/classes");
       console.log("Fetched Data:", response.data);
 
       setClasses(response.data);
@@ -33,7 +36,7 @@ export default function Classes({ isLoggedIn }) {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:3032/classes/${classId}`,
+        `https://capstonebackend-u3uj.onrender.com/classes/${classId}`,
         {}, // No body needed
         {
           headers: {
@@ -56,7 +59,7 @@ export default function Classes({ isLoggedIn }) {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.get("http://localhost:3032/account", {
+      const res = await axios.get("https://capstonebackend-u3uj.onrender.com/account", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -72,22 +75,6 @@ export default function Classes({ isLoggedIn }) {
   useEffect(() => {
     fetchUserData();
   }, []);
-
-  // const addLike = async () => {
-  //   try {
-  //       const token = localStorage.getItem("token");
-  //       setLikes(likes + 1);
-
-  //     const res = await axios.patch(
-  //       `http://localhost:3032/classes`, { likes: likes + 1 });
-  //     console.log("Like", res.data);
-  //   } catch (error) {
-  //     console.error()
-  //   }
-  // };
-  //   const refresh = () => {
-  //     fetchDataClass();
-  // }
 
   return (
     <div>

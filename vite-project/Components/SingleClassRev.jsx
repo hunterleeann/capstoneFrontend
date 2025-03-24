@@ -13,7 +13,7 @@ export default function SingleClassRev({ isLoggedIn }) {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
-        `http://localhost:3032/classes/${classId}/reviews`,
+        `https://capstonebackend-u3uj.onrender.com/classes/${classId}/reviews`,
         {
           headers: {
             "Content-Type": "application/json",

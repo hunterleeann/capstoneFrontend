@@ -20,7 +20,7 @@ export default function Register() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:3032/auth/register", {
+      const { data } = await axios.post("https://capstonebackend-u3uj.onrender.com/auth/register", {
         userName: form.userName,
         email: form.email,
         password: form.password,

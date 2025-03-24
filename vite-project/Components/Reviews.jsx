@@ -24,7 +24,7 @@ export default function Reviews({
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          "http://localhost:3032/account/reviews",
+          "https://capstonebackend-u3uj.onrender.com/account/reviews",
           {
             headers: {
               "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export default function Reviews({
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          "http://localhost:3032/classes/:classId/reviews",
+          "https://capstonebackend-u3uj.onrender.com/classes/:classId/reviews",
           {
             headers: {
               "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function Reviews({
     const getClassRevs = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await axios.get("http://localhost:3032/reviews", {
+        const response = await axios.get("https://capstonebackend-u3uj.onrender.com/reviews", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

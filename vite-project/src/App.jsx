@@ -37,12 +37,15 @@ function App() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axios.get("http://localhost:3032/account", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        "https://capstonebackend-u3uj.onrender.com/account",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log("Fetched user:", res.data);
       setAccountData(res.data);

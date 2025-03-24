@@ -22,7 +22,7 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3032/auth/login`, {
+      const response = await axios.post(`https://capstonebackend-u3uj.onrender.com/auth/login`, {
         email: form.email,
         password: form.password,
       });

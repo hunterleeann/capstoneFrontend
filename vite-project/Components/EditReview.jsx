@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-// import DelRev from "./DeleteRev";
 
 export default function EditRev({ userReviews, setUserReviews }) {
-  //   const [score, setScore] = useState({ score: 0 });
-  //   const [comment, setComment] = useState({ comment: "" });
   const [form, setForm] = useState({ score: "", comment: "" });
   const [showForm, setShowForm] = useState(false);
   const [selectedRev, setSelectedRev] = useState();
@@ -14,7 +11,7 @@ export default function EditRev({ userReviews, setUserReviews }) {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.patch(
-        `http://localhost:3032/myReviews/${revId}`,
+        `https://capstonebackend-u3uj.onrender.com/myReviews/${revId}`,
         {
           score: form.score,
           comment: form.comment,
@@ -42,7 +39,7 @@ export default function EditRev({ userReviews, setUserReviews }) {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.delete(
-        `http://localhost:3032/myReviews/${revId}`,
+        `https://capstonebackend-u3uj.onrender.com/myReviews/${revId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -5,13 +5,9 @@ import { api } from "/store/api";
 const classApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getClasses: builder.query({
-      query: ({ email, password }) => ({
+      query: () => ({
         url: "/classes",
         method: "GET",
-        body: {
-          email,
-          password,
-        },
       }),
       providesTag: ["Class"],
     }),
@@ -24,6 +20,13 @@ const classApi = api.injectEndpoints({
           },
         }),
         providesTag: ["User"],
+      }),
+      getUserClass: builder.query({
+        query: (classType) => ({
+          url: "/classes/${classType}",
+          method: "GET",
+        }),
+        providesTag: ["Class"],
       }),
     // getUser: builder.query({
     //   query: () => ({
@@ -51,4 +54,4 @@ const classSlice = createSlice({
 
 export default classSlice.reducer;
 
-export const {  useGetClassesQuery, useGetCustomerQuery } = classApi;
+export const {  useGetClassesQuery, useGetCustomerQuery, useGetUserClassQuery} = classApi;
